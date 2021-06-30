@@ -7,10 +7,7 @@ import com.examportal.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +23,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{username}")
+    public ResponseEntity<User>getUserByUsername(@PathVariable(name = "username") String username){
+        User user=userService.findUserByUsername(username);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody User user) throws Exception {
@@ -45,5 +47,12 @@ public class UserController {
         User newUser=userService.saveUser(user,userRoles);
 
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{uid}")
+    public ResponseEntity<User> deleteUser(@PathVariable(name = "uid") String uid)throws Exception{
+        userService.deleteUser(uid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }
