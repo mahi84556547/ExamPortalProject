@@ -25,6 +25,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByUid(String uid) {
+        return userRepository.findByUid(uid);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public User saveUser(User user, Set<UserRole> userRoles) throws Exception {
      User localUser=userRepository.findByUsername(user.getUsername());
      if(localUser != null){
@@ -38,5 +48,14 @@ public class UserServiceImpl implements UserService {
 
      }
         return localUser;
+    }
+
+    @Override
+    public void deleteUser(String uid) throws Exception {
+        User findUser=findUserByUid(uid);
+        if(findUser==null){
+            throw new Exception("user not found");
+        }
+        userRepository.delete(findUser);
     }
 }
