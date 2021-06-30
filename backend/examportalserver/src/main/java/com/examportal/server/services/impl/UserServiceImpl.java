@@ -1,0 +1,42 @@
+package com.examportal.server.services.impl;
+
+import com.examportal.server.models.User;
+import com.examportal.server.models.UserRole;
+import com.examportal.server.repositories.RoleRepository;
+import com.examportal.server.repositories.UserRepository;
+import com.examportal.server.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
+
+@Transactional
+@Service
+public class UserServiceImpl implements UserService {
+
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public User saveUser(User user, Set<UserRole> userRoles) throws Exception {
+     User localUser=userRepository.findByUsername(user.getUsername());
+     if(localUser != null){
+         throw new Exception("User Already existe with username: "+user.getUsername());
+     }else {
+         for (UserRole role:userRoles){
+             roleRepository.save(role.getRole());
+         }
+         user.getUserRoleSet().addAll(userRoles);
+         localUser=userRepository.save(user);
+
+     }
+        return localUser;
+    }
+}

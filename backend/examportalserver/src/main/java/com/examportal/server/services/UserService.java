@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface UserService {
 
-    public User saveUser(User user, Set<UserRole> userRoleSet);
+    public User saveUser(User user, Set<UserRole> userRoleSet) throws Exception;
 }
