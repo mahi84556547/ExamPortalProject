@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
     password:'',
     phone:''
   }
-  constructor() { }
+  constructor(private _userService:UserService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,21 @@ export class SignupComponent implements OnInit {
       alert('first name is required');
       return;
     }
+
+    this._userService.saveUser(this.user).subscribe(
+      (response)=>{
+        console.log(response);
+        
+        console.log("success");
+      }
+      ,
+      (error)=>{
+        console.log(error);
+        
+        console.log("Faild");
+      }
+    );
+
   }
 
 }

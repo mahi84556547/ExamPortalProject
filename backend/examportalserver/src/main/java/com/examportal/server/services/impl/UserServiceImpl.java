@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Transactional
 @Service
@@ -38,14 +39,14 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user, Set<UserRole> userRoles) throws Exception {
      User localUser=userRepository.findByUsername(user.getUsername());
      if(localUser != null){
-         throw new Exception("User Already existe with username: "+user.getUsername());
+         throw new Exception("User Already exist with username: "+user.getUsername());
      }else {
          for (UserRole role:userRoles){
              roleRepository.save(role.getRole());
          }
          user.getUserRoleSet().addAll(userRoles);
+         user.setUid(UUID.randomUUID().toString());
          localUser=userRepository.save(user);
-
      }
         return localUser;
     }

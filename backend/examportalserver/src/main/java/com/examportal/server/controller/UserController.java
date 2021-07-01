@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UserController {
 
     private UserService userService;
@@ -35,7 +36,6 @@ public class UserController {
         Set<UserRole> userRoles=new HashSet<>();
 
         Role role=new Role();
-        role.setId(1L);
         role.setName("NORMAL");
 
         UserRole userRole=new UserRole();
