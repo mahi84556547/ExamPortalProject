@@ -10,7 +10,7 @@
                 <form (ngSubmit)="onRegister()">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>First Name*</mat-label>
-                        <input
+                        <input required
                         [(ngModel)]="user.firstName"
                         name="firstName"
                         matInput placeholder="Enter here ...">
@@ -19,7 +19,7 @@
 
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Last Name*</mat-label>
-                        <input
+                        <input required
                         [(ngModel)]="user.lastName"
                         name="lastName"
                         matInput placeholder="Enter here ...">
@@ -28,7 +28,7 @@
 
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Username*</mat-label>
-                        <input
+                        <input required
                         [(ngModel)]="user.username"
                         name="username"
                         matInput placeholder="Enter here ...">
@@ -37,7 +37,7 @@
 
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Email*</mat-label>
-                        <input
+                        <input required
                         [(ngModel)]="user.email"
                         name="email"
                         type="email" matInput placeholder="Enter here ...">
@@ -46,7 +46,7 @@
 
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Password*</mat-label>
-                        <input
+                        <input required
                         [(ngModel)]="user.password"
                         name="password"
                         type="password" matInput placeholder="Enter here ...">
@@ -55,7 +55,7 @@
 
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Phone number</mat-label>
-                        <input
+                        <input 
                         [(ngModel)]="user.phone"
                         name="phone"
                         type="number" matInput placeholder="Enter here ...">
