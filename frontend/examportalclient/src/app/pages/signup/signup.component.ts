@@ -1,5 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -15,14 +16,19 @@ export class SignupComponent implements OnInit {
     password:'',
     phone:''
   }
-  constructor(private _userService:UserService) { }
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  constructor(private _userService:UserService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   public onRegister(){
     if(this.user.firstName==''|| this.user.firstName==null){
-      alert('first name is required');
+      this.openSnackBar("First name is required.","OK");
       return;
     }
 
@@ -34,12 +40,17 @@ export class SignupComponent implements OnInit {
       }
       ,
       (error)=>{
-        console.log(error);
-        
-        console.log("Faild");
+        this.openSnackBar(error.error.message,"OK");
       }
     );
+  }
 
+  openSnackBar(message:string, action:string) {
+    this._snackBar.open(message, action, {
+      duration:5000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
 }
