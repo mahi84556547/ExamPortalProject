@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-signup',
@@ -34,9 +35,11 @@ export class SignupComponent implements OnInit {
 
     this._userService.saveUser(this.user).subscribe(
       (response)=>{
-        console.log(response);
-        
-        console.log("success");
+        Swal.fire(
+          'Success',
+          'a new user saved successfully',
+          'success'
+        );
       }
       ,
       (error)=>{
