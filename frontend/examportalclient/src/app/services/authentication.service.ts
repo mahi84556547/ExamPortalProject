@@ -57,6 +57,6 @@ export class AuthenticationService {
 
   public getUserRole(){
     let user=this.getUser();
-    return user.authorites[0].authority;
+    return user.authorities[0].authority;
   }
 }

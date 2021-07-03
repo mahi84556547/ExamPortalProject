@@ -1,6 +1,7 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,8 @@ export class SigninComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private _authenticationService:AuthenticationService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private _router:Router) { }
 
   ngOnInit(): void {
   }
@@ -29,14 +31,24 @@ export class SigninComponent implements OnInit {
 
     this._authenticationService.generateToken(this.loginData).subscribe(
       (response:any)=>{
-        console.log(response.token);
-        console.log('from signin'+ this._authenticationService.getToken());
+        //console.log(response.token);
+        //console.log('from signin'+ this._authenticationService.getToken());
         
         this._authenticationService.loginUser(response.token);
         this._authenticationService.getCurrentUser().subscribe(
           (response)=>{
             console.log(response);
             this._authenticationService.setUser(response);
+            console.log(this._authenticationService.getUserRole());
+
+            if(this._authenticationService.getUserRole()=='NORMAL'){
+              this._router.navigateByUrl("/user-dashboard");
+            }else if(this._authenticationService.getUserRole()=='ADMIN'){
+              this._router.navigateByUrl("/admin-dashboard");
+            }else{
+              this._authenticationService.logout();
+            }
+              
           }
         );
       }
