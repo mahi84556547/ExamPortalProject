@@ -50,7 +50,7 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<UserRole>userRoleSet=new HashSet<>();
 
     @Override

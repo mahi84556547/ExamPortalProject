@@ -1,5 +1,6 @@
 package com.examportal.server.controller;
 
+import com.examportal.server.models.User;
 import com.examportal.server.payloads.requests.JwtRequest;
 import com.examportal.server.payloads.responses.JwtResponse;
 import com.examportal.server.services.impl.UserServiceDetailsImpl;
@@ -13,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("authentication")
@@ -49,5 +52,11 @@ public class AuthenticationController {
         }catch (BadCredentialsException bce){
             throw new Exception("Invalid Credentials "+ bce.getMessage());
         }
+    }
+
+    @GetMapping("/current-user")
+    public User currentUser(Principal principal){
+        String name =principal.getName();
+         return  ( (User) this.userServiceDetails.loadUserByUsername(principal.getName()));
     }
 }

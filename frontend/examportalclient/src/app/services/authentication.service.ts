@@ -27,6 +27,10 @@ export class AuthenticationService {
     }
   }
 
+  public getCurrentUser(){
+    return this._http.get(`${environment.baseUrl}/authentication/current-user`);
+  }
+
   public logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -34,7 +38,7 @@ export class AuthenticationService {
   }
 
   public getToken(){
-    localStorage.getItem('token');
+    return localStorage.getItem('token');
   }
 
   public setUser(user:any){

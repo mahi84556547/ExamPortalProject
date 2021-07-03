@@ -53,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             System.out.println("invalid token, not start with bearer string.");
         }
 
-        if(username != null && SecurityContextHolder.getContext() == null){
+        if(username != null && SecurityContextHolder.getContext() != null){
             final UserDetails userDetails=userServiceDetails.loadUserByUsername(username);
             if(this.jwtUtils.validateToken(jwtToken,userDetails)){
                 UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
@@ -61,7 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }else {
-            System.out.println("token is nit valid");
+            System.out.println("token is not valid");
         }
 
         filterChain.doFilter(httpServletRequest,httpServletResponse);

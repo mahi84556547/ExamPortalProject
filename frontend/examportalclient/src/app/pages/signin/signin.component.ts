@@ -29,7 +29,16 @@ export class SigninComponent implements OnInit {
 
     this._authenticationService.generateToken(this.loginData).subscribe(
       (response:any)=>{
-        console.log(response['token']);
+        console.log(response.token);
+        console.log('from signin'+ this._authenticationService.getToken());
+        
+        this._authenticationService.loginUser(response.token);
+        this._authenticationService.getCurrentUser().subscribe(
+          (response)=>{
+            console.log(response);
+            this._authenticationService.setUser(response);
+          }
+        );
       }
     );
   }
