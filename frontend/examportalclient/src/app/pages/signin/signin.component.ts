@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../../services/authentication.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +8,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  public loginData={
+    username:'',
+    password:''
+  };
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor() { }
+  constructor(private _authenticationService:AuthenticationService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   onLogin(){
+    if(this.loginData.username.trim()=='' || this.loginData.password.trim() ==''){
+      this.openSnackBar("username & password is required.","OK");
+      return;
+    }
 
+    this._authenticationService.generateToken(this.loginData).subscribe(
+      (response:any)=>{
+        console.log(response['token']);
+      }
+    );
+  }
+
+  openSnackBar(message:string, action:string) {
+    this._snackBar.open(message, action, {
+      duration:5000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
 }
+
+
+ 
