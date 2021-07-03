@@ -1,3 +1,5 @@
+import { UserGuard } from './guards/user.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -10,8 +12,8 @@ const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'sginup',component:SignupComponent},
   {path:'sginin',component:SigninComponent},
-  {path:'user-dashboard',component:UserDashboardComponent},
-  {path:'admin-dashboard',component:AdminDashboardComponent},
+  {path:'user-dashboard',component:UserDashboardComponent,canActivate:[UserGuard]},
+  {path:'admin-dashboard',component:AdminDashboardComponent,canActivate:[AdminGuard]},
 ];
 
 @NgModule({
