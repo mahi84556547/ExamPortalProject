@@ -20,6 +20,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import {MatListModule} from '@angular/material/list';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     HomeComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
+    SidebarComponent,
+    WelcomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,8 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     MatSnackBarModule,
     MatCardModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,0 +1,15 @@
+.profile-image{
+    max-width: 150px;
+    max-height: 150px;
+    border: 2px solid #ff4058;
+    border-radius: 50%;
+}
+
+.tabel{
+    width: 100%;
+}
+
+.tabel tr td{
+    padding: 20px 50px;
+    border: 1px solid red;
+}

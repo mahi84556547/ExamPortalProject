@@ -1,3 +1,5 @@
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
@@ -12,8 +14,13 @@ const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'sginup',component:SignupComponent},
   {path:'sginin',component:SigninComponent},
-  {path:'user-dashboard',component:UserDashboardComponent,canActivate:[UserGuard]},
-  {path:'admin-dashboard',component:AdminDashboardComponent,canActivate:[AdminGuard]},
+  {path:'user-dashboard',component:UserDashboardComponent,canActivate:[UserGuard],children:[
+    {path:'profile',component:ProfileComponent}
+  ]},
+  {path:'admin-dashboard',component:AdminDashboardComponent,canActivate:[AdminGuard],children:[
+    {path:'',component:WelcomeComponent},
+    {path:'profile',component:ProfileComponent}
+  ]},
 ];
 
 @NgModule({
