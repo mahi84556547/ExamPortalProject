@@ -31,24 +31,20 @@ export class SigninComponent implements OnInit {
 
     this._authenticationService.generateToken(this.loginData).subscribe(
       (response:any)=>{
-        //console.log(response.token);
-        //console.log('from signin'+ this._authenticationService.getToken());
-        
+
         this._authenticationService.loginUser(response.token);
         this._authenticationService.getCurrentUser().subscribe(
           (response)=>{
-            console.log(response);
             this._authenticationService.setUser(response);
-            console.log(this._authenticationService.getUserRole());
-
             if(this._authenticationService.getUserRole()=='NORMAL'){
+              this._authenticationService.loginSubject.next(true);
               this._router.navigateByUrl("/user-dashboard");
             }else if(this._authenticationService.getUserRole()=='ADMIN'){
+              this._authenticationService.loginSubject.next(true);
               this._router.navigateByUrl("/admin-dashboard");
             }else{
               this._authenticationService.logout();
-            }
-              
+            }    
           }
         );
       }

@@ -1,12 +1,14 @@
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  public loginSubject=new Subject<boolean>();
   constructor(private _http:HttpClient) { }
 
   public generateToken(logindata:any){

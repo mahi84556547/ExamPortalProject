@@ -8,10 +8,16 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  isLoggedIn:boolean=false;
+  username:string='';
   constructor(private _authenticationService:AuthenticationService,private _router:Router) { }
 
   ngOnInit(): void {
+    this._authenticationService.loginSubject.asObservable().subscribe(
+      (data)=>{
+        this.getCurrentUserName();
+      }
+    )
   }
 
   checkIsLogin(){
@@ -20,7 +26,15 @@ export class NavbarComponent implements OnInit {
 
   logOut(){
    this._authenticationService.logout();
+   this._authenticationService.loginSubject.next(false);
    this._router.navigateByUrl('/sginin');
+  }
+
+  getCurrentUserName(){
+    this.isLoggedIn=this._authenticationService.isLoggedIn();
+    if(this.isLoggedIn){
+      this.username=this._authenticationService.getUser()?.username;
+    }
   }
 
 }

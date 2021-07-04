@@ -13,6 +13,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -24,17 +25,20 @@ public class AuthenticationController {
     private UserServiceDetailsImpl userServiceDetails;
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
-    public AuthenticationController(UserServiceDetailsImpl userServiceDetails, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+    public AuthenticationController(UserServiceDetailsImpl userServiceDetails, AuthenticationManager authenticationManager, JwtUtils jwtUtils,BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userServiceDetails = userServiceDetails;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
+        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
     }
 
     @PostMapping("/generate-token")
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
-            authenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
+            String cryptPassword=bCryptPasswordEncoder.encode(jwtRequest.getPassword());
+            authenticate(jwtRequest.getUsername(),cryptPassword);
         }catch (UsernameNotFoundException unfe){
             unfe.printStackTrace();
             System.out.println("Username not found");

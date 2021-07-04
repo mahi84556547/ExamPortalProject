@@ -6,6 +6,7 @@ import com.examportal.server.repositories.RoleRepository;
 import com.examportal.server.repositories.UserRepository;
 import com.examportal.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +19,13 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
     }
 
     @Override
@@ -44,6 +47,8 @@ public class UserServiceImpl implements UserService {
          for (UserRole role:userRoles){
              roleRepository.save(role.getRole());
          }
+         String cryptPassword=bCryptPasswordEncoder.encode(user.getPassword());
+         user.setPassword(cryptPassword);
          user.getUserRoleSet().addAll(userRoles);
          user.setUid(UUID.randomUUID().toString());
          localUser=userRepository.save(user);
