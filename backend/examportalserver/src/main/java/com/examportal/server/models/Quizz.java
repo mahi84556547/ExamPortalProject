@@ -1,11 +1,13 @@
 package com.examportal.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -41,5 +43,8 @@ public class Quizz {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "quizz",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    private Set<Question> questionSet;
 
 }
