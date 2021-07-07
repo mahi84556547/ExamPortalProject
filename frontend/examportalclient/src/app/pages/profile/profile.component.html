@@ -5,22 +5,46 @@
         <div class="container">
             <div class="container text-center">
                 <img class="profile-image" src="https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png" alt="">
-                <h3>You Name</h3>
+                <h3>{{user?.firstName +  " "+ user?.lastName}}</h3>
             </div>
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                 <table class="tabel">
                     <tr>
+                        <td>First name:</td>
+                        <td>{{user?.firstName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{user?.lastName}}</td>
+                    </tr>
+                    <tr>
                         <td>UserName</td>
-                        <td>Abdelaaziz</td>
+                        <td>{{user?.username}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{user?.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Roles</td>
+                        <td>{{user?.authorities[0].authority}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{user?.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>{{user?.enabled}}</td>
                     </tr>
                 </table>        
                 </div>
             </div>
         </div>
     </div>
-    <mat-card-actions>
-        <button mat-raised mat-button color="primary">Update</button>
-        <button mat-button>Cancel</button>
-      </mat-card-actions>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button color="primary">Update</button>
+        <button mat-raised-button color="accent">Cancel</button>
+    </mat-card-actions>
 </mat-card>

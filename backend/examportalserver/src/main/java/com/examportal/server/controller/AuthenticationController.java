@@ -38,7 +38,7 @@ public class AuthenticationController {
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
             String cryptPassword=bCryptPasswordEncoder.encode(jwtRequest.getPassword());
-            authenticate(jwtRequest.getUsername(),cryptPassword);
+            authenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
         }catch (UsernameNotFoundException unfe){
             unfe.printStackTrace();
             System.out.println("Username not found");

@@ -1,7 +1,7 @@
 .profile-image{
     max-width: 150px;
     max-height: 150px;
-    border: 2px solid #ff4058;
+    border: 2px solid #E4E4E4;
     border-radius: 50%;
 }
 
@@ -10,6 +10,6 @@
 }
 
 .tabel tr td{
-    padding: 20px 50px;
-    border: 1px solid red;
+    padding: 20px 30px;
+    border: 1px solid #E4E4E4;
 }
