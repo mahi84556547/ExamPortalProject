@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -25,9 +26,9 @@ public class AuthenticationController {
     private UserServiceDetailsImpl userServiceDetails;
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtUtils;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder bCryptPasswordEncoder ;
     @Autowired
-    public AuthenticationController(UserServiceDetailsImpl userServiceDetails, AuthenticationManager authenticationManager, JwtUtils jwtUtils,BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AuthenticationController(UserServiceDetailsImpl userServiceDetails, AuthenticationManager authenticationManager, JwtUtils jwtUtils,PasswordEncoder bCryptPasswordEncoder) {
         this.userServiceDetails = userServiceDetails;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
