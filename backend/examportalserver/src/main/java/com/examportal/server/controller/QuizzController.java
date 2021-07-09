@@ -44,7 +44,7 @@ public class QuizzController {
     }
 
     @DeleteMapping("/{quizzId}")
-    public ResponseEntity<?> udeleteQuizz(@PathVariable(name = "quizzId") Long quizzId){
+    public ResponseEntity<?> deleteQuizz(@PathVariable(name = "quizzId") Long quizzId){
         quizzService.deleteQuizz(quizzId);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

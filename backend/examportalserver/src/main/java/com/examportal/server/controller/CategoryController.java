@@ -45,7 +45,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<?> udeleteCategory(@PathVariable(name = "categoryId") Long categoryIdy){
+    public ResponseEntity<?> deleteCategory(@PathVariable(name = "categoryId") Long categoryIdy){
         categoryService.deleteCategory(categoryIdy);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
