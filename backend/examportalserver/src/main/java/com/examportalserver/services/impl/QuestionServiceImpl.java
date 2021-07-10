@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -32,7 +33,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestionByQuizz(Long quizzId) {
+    public List<Question> getQuestionByQuizz(Long quizzId) {
         return questionRepository.findByQuizzId(quizzId);
     }
 

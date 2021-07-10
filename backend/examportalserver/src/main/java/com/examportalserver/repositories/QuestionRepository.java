@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.examportalserver.models.Question;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface QuestionRepository extends JpaRepository<Question,Long> {
-    Question findByQuizzId(Long quizzId);
+    List<Question> findByQuizzId(Long quizzId);
 }

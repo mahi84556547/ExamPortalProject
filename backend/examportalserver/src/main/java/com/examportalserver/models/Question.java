@@ -35,6 +35,9 @@ public class Question {
     @Column(name = "option4")
     private String option4;
 
+    @Column(name = "answer")
+    private String answer;
+
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "quizz_id")
     private Quizz quizz;

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -32,9 +33,9 @@ public class QuestionController {
     }
 
     @GetMapping("quizz/{quizzId}")
-    public ResponseEntity<Question> getQuestionByQuizzId(@PathVariable(name = "quizzId") Long quizzId){
-        Question question=questionService.getQuestionByQuizz(quizzId);
-        return new ResponseEntity<Question>(question, HttpStatus.OK);
+    public ResponseEntity<List<Question>> getQuestionByQuizzId(@PathVariable(name = "quizzId") Long quizzId){
+        List<Question>  questions=questionService.getQuestionByQuizz(quizzId);
+        return new ResponseEntity<List<Question> >(questions, HttpStatus.OK);
     }
 
     @PostMapping
